@@ -5,5 +5,4 @@ export const Wrapper = styled.div`
     width: 4rem;
     height: 100vh;
     z-index: 4;
-    position:fixed;
 `;

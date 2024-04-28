@@ -6,8 +6,7 @@ type Props = {
 
 export const Wrapper = styled.div<Props>`
     width: 100%;
-    height: 4rem;
-    display:flex;
+    height: 4rem; 
     justify-content: center;
     align-items: center;
     background-color:transparent;
@@ -17,6 +16,7 @@ export const Wrapper = styled.div<Props>`
     position:relative;
     border-bottom: 2px solid ${props => props.theme.colors.secondary};
     background-color: ${props => props.theme.colors.primary};
+    display:flex;
 
     &:after{
         content: ${props => `'${props.coment}'`};
