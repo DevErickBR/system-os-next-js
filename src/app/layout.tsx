@@ -14,14 +14,18 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    background-color: ${props => props.theme.colors.background};
   }
 `;
 
 const Wrapper = styled.div`
   display:flex;
   color: ${props => props.theme.colors.text};
+  background-color: ${props => props.theme.colors.background};
+  -webkit-font-smoothing:  antialiased;
+  height: 100vh;
+  width: 100vw;
 `;
+
 
 type Props = {
   children: React.ReactElement
