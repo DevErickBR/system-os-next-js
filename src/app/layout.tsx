@@ -26,6 +26,14 @@ const Wrapper = styled.div`
   width: 100vw;
 `;
 
+const WrapperChildren = styled.div`
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+`;
+
 
 type Props = {
   children: React.ReactElement
@@ -40,7 +48,9 @@ export default function RootLayout({ children }: Props) {
             <GlobalStyle />
             <Wrapper>
               <NavBarLeft />
-              {children}
+              <WrapperChildren>
+                {children}
+              </WrapperChildren>
             </Wrapper>
           </ThemeProvider>
         </StyledComponentsRegistry>

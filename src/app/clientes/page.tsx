@@ -4,7 +4,7 @@ import { useDefDocs } from "../helpers/useDefDoc";
 import * as ReactIcons from 'react-icons/fa6'
 
 import React from "react";
-import { Wrapper } from "./styled";
+import { Wrapper, ButtonAction } from "./styled";
 
 const Page = (): React.ReactNode => {
     const { defDocs } = useDefDocs();
@@ -36,9 +36,9 @@ const Page = (): React.ReactNode => {
                                 <td>{item.telefoneCliente}</td>
                                 <td>{defDocs[item.idTipoDocumento - 1].tipoDocumento}</td>
                                 <td className="actions">
-                                    <div id="delete"><ReactIcons.FaUserMinus /></div>
-                                    <div id="edit"><ReactIcons.FaUserPen /></div>
-                                    <div id="more"><ReactIcons.FaPlus /></div>
+                                    <ButtonAction content="Deletar" id="delete"><ReactIcons.FaUserMinus /></ButtonAction>
+                                    <ButtonAction content="Editar" id="edit"><ReactIcons.FaUserPen /></ButtonAction>
+                                    <ButtonAction content="Informarções" id="more"><ReactIcons.FaPlus /></ButtonAction>
                                 </td>
                             </tr>
                         ))}

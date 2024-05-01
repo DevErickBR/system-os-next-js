@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
+
+
 export const Wrapper = styled.div`
+    display:flex;
     width: 90%;
-    height: 60%;
+    height: 75%;
     overflow:auto;
     z-index: 1;
+    letter-spacing: 0.15rem;
     
+    &::-webkit-scrollbar{
+        }
 
     table{
         border-collapse: collapse;
@@ -23,7 +29,6 @@ export const Wrapper = styled.div`
             height: 3rem;
             position: sticky;
             top: 0;
-
             
             input{
                     height:70%;
@@ -76,19 +81,44 @@ export const Wrapper = styled.div`
             tr {
                 padding: 10px;
                 height: 50px;
-                border-bottom: 1px solid red;
+                border-bottom: 0.2rem solid ${props => props.theme.colors.primary};
                 text-align:center;
-                td .actions{
-                    display: flex;
-                    flex-direction: row;
-                    div{
-                        width: 200px;
-                    }
+                
+                &:hover{
+                    background-color:${props => props.theme.colors.primary};
                 }
             }
+
         }
     
     }
 
     
+
+    
+`;
+
+type Props = {
+    content?: string;
+}
+
+export const ButtonAction = styled.div<Props>`
+    display:inline;
+    margin-right: 2rem;
+    font-size: 1.5rem;
+    text-align:center;
+    width: fit-content;
+    
+    svg{
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        
+    }
+
+    &:hover{
+        svg{
+            transform:scale(1.4);
+            color: ${props => props.theme.colors.extra};
+        }
+    }
 `;
