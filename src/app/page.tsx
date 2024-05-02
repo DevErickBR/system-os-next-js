@@ -5,7 +5,6 @@ import React from "react";
 
 const Page = (): React.ReactNode => {
 
-  const { clients } = useClientList()
   return (
     <>
       <div>

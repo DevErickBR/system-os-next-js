@@ -14,7 +14,7 @@ export const Wrapper = styled.div<Props>`
     color: ${props => props.theme.colors.text};
     transition: all 200ms;
     position:relative;
-    border-bottom: 2px solid ${props => props.theme.colors.secondary};
+    border-bottom: 2px solid ${props => props.theme.colors.extra};
     background-color: ${props => props.theme.colors.primary};
     display:flex;
 
