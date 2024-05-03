@@ -12,13 +12,13 @@ import ModalClient from "../components/modal-client";
 const Page = (): React.ReactNode => {
     const { defDocs } = useDefDocs();
     const { clients } = useClientList();
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <>
             <WrapperTitle>
                 <h1>Clientes</h1>
-                <div>ADICIONAR<ReactIcons.FaUserPlus /></div>
+                <div onClick={() => setIsOpen(true)}>ADICIONAR<ReactIcons.FaUserPlus /></div>
             </WrapperTitle>
             <Wrapper>
                 {(clients.length != 0 && defDocs.length != 0) &&
@@ -46,8 +46,8 @@ const Page = (): React.ReactNode => {
                                     <td>{defDocs[item.idTipoDocumento - 1].tipoDocumento}</td>
                                     <td className="actions">
                                         <div className="WrapperActions">
-                                            <ButtonAction id="delete" onClick={() => useDeleteClient(item)}><ReactIcons.FaUserMinus /></ButtonAction>
-                                            <ButtonAction id="edit"><ReactIcons.FaUserPen /></ButtonAction>
+                                            <ButtonAction id="delete" onClick={() => { useDeleteClient(item) }}><ReactIcons.FaUserMinus /></ButtonAction>
+                                            <ButtonAction id="edit" ><ReactIcons.FaUserPen /></ButtonAction>
                                             <ButtonAction id="more"><ReactIcons.FaPlus /></ButtonAction>
                                         </div>
                                     </td>
@@ -61,7 +61,7 @@ const Page = (): React.ReactNode => {
                     <h1>Nenhum Cliente Cadastrado!</h1>
                 }
             </Wrapper >
-            <ModalClient view={isOpen} />
+            <ModalClient view={isOpen} state={setIsOpen} />
         </>
     );
 };

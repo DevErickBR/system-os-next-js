@@ -18,7 +18,9 @@ export const useDefDocs = () => {
 
 
 
-    useEffect(() => { getDefDocs() }, [getDefDocs])
+    useEffect(() => {
+        getDefDocs()
+    }, [getDefDocs])
 
     return { defDocs }
 }

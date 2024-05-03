@@ -8,5 +8,6 @@ export default {
         text: '#E9ECEF',
         text2: '#212529',
         extra: '#5a5c61',
+        extra2: '#1a1c25'
     }
 }

@@ -10,7 +10,8 @@ declare module 'styled-components' {
             secondart: string,
             text: string,
             text2: string,
-            extra: string
+            extra: string,
+            extra2: string,
         }
     }
 };
