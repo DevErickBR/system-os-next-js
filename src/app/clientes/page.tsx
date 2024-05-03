@@ -4,13 +4,15 @@ import { useDefDocs } from "../helpers/useDefDoc";
 import { useDeleteClient } from "../helpers/useDeleteClient";
 import * as ReactIcons from 'react-icons/fa6'
 
-import React from "react";
+import React, { useState } from "react";
 import { Wrapper, ButtonAction, WrapperTitle } from "./styled";
+import ModalClient from "../components/modal-client";
 
 
 const Page = (): React.ReactNode => {
     const { defDocs } = useDefDocs();
     const { clients } = useClientList();
+    const [isOpen, setIsOpen] = useState(true)
 
     return (
         <>
@@ -59,6 +61,7 @@ const Page = (): React.ReactNode => {
                     <h1>Nenhum Cliente Cadastrado!</h1>
                 }
             </Wrapper >
+            <ModalClient view={isOpen} />
         </>
     );
 };
