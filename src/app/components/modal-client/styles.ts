@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
     flex-direction:column;
     justify-content:space-evenly;
     align-items: center;
+    text-align:center;
     border: 0.5rem solid ${props => props.theme.colors.extra};
     border-radius:30px;
 
