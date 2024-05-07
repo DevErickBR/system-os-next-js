@@ -14,4 +14,4 @@ declare module 'styled-components' {
             extra2: string,
         }
     }
-};
+}

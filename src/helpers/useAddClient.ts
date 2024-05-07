@@ -1,13 +1,5 @@
 import axios from "axios";
 
-type Client = {
-    nomeCliente: string,
-    telefoneCliente: string,
-    idTipoDocumento: number,
-    documentoCliente: string
-    emailCliente: string
-}
-
 function useAddClient(cliente: Client) {
     const postClient = async () => {
         const api = process.env.NEXT_PUBLIC_URL

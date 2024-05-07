@@ -1,18 +1,31 @@
 'use client'
-import { useClientList } from "../helpers/useClientList";
-import { useDefDocs } from "../helpers/useDefDoc";
-import { useDeleteClient } from "../helpers/useDeleteClient";
+import { useClientList } from "../../helpers/useClientList";
+import { useDefDocs } from "../../helpers/useDefDoc";
+import { useDeleteClient } from "../../helpers/useDeleteClient";
 import * as ReactIcons from 'react-icons/fa6'
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Wrapper, ButtonAction, WrapperTitle } from "./styled";
 import ModalClient from "../components/modal-client";
+import usePaginationData from "@/helpers/usePaginationData";
 
 
-const Page = (): React.ReactNode => {
+type Props = {
+    searchParams?: {
+        page?: string,
+        limit?: string
+    }
+}
+
+const Page = ({ searchParams }: Props): JSX.Element => {
+    const page = Number(searchParams?.page) || 1;
+    const limit = Number(searchParams?.limit) || 5;
+
     const { defDocs } = useDefDocs();
-    const { clients } = useClientList();
+    const { clients, setClients } = useClientList();
     const [isOpen, setIsOpen] = useState(false)
+
+    useEffect(() => { usePaginationData({ list: clients, limit }) }, [])
 
     return (
         <>
@@ -46,7 +59,7 @@ const Page = (): React.ReactNode => {
                                     <td>{defDocs[item.idTipoDocumento - 1].tipoDocumento}</td>
                                     <td className="actions">
                                         <div className="WrapperActions">
-                                            <ButtonAction id="delete" onClick={() => { useDeleteClient(item) }}><ReactIcons.FaUserMinus /></ButtonAction>
+                                            <ButtonAction id="delete" onClick={() => { useDeleteClient(item, clients, setClients) }}><ReactIcons.FaUserMinus /></ButtonAction>
                                             <ButtonAction id="edit" ><ReactIcons.FaUserPen /></ButtonAction>
                                             <ButtonAction id="more"><ReactIcons.FaPlus /></ButtonAction>
                                         </div>
@@ -61,7 +74,7 @@ const Page = (): React.ReactNode => {
                     <h1>Nenhum Cliente Cadastrado!</h1>
                 }
             </Wrapper >
-            <ModalClient view={isOpen} state={setIsOpen} />
+            <ModalClient view={isOpen} state={setIsOpen} listClients={clients} setList={setClients} />
         </>
     );
 };

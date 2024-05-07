@@ -1,5 +1,5 @@
 'use client'
-import { useClientList } from "./helpers/useClientList";
+import { useClientList } from "../helpers/useClientList";
 
 import React from "react";
 

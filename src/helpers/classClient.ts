@@ -3,7 +3,7 @@ class Cliente {
     telefoneCliente: string
     idTipoDocumento: number
     documentoCliente: string
-    emailCliente: string
+    emailCliente: string | ""
 
     constructor(nomeCliente: string, telefoneClient: string, idTipoDocumento: number, documentoCliente: string, emailCliente: string) {
         this.nomeCliente = nomeCliente;
