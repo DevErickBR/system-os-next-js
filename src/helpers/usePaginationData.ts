@@ -1,20 +1,35 @@
-import useClientList from "./useClientList"
-
 type Props = {
     list: Client[],
-    limit: number
+    limit: number,
+    page: number
 }
 
-const usePaginationData = ({ list, limit }: Props) => {
+const usePaginationData = ({ list, limit, page }: Props) => {
     const metaData = {
         pagination: {
             totalItens: list.length,
-            current: 1
+            current: page
         }
     }
+    const response: Client[][] = [];
     const pages = Math.ceil(metaData.pagination.totalItens / limit)
+    let count = 0
 
-    console.log(pages)
+    for (let i = 1; i <= pages; i++) {
+        const newPage = [];
+        for (let i = 0; i < limit; i++) {
+            if (list[count]) {
+                newPage.push(list[count])
+                count++
+            }
+
+        }
+
+        response.push(newPage)
+    }
+
+    const data = response[metaData.pagination.current - 1]
+    return { data, metaData }
 }
 
 

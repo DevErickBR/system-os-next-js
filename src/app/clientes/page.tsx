@@ -4,7 +4,7 @@ import { useDefDocs } from "../../helpers/useDefDoc";
 import { useDeleteClient } from "../../helpers/useDeleteClient";
 import * as ReactIcons from 'react-icons/fa6'
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Wrapper, ButtonAction, WrapperTitle } from "./styled";
 import ModalClient from "../components/modal-client";
 import usePaginationData from "@/helpers/usePaginationData";
@@ -24,11 +24,13 @@ const Page = ({ searchParams }: Props): JSX.Element => {
     const { defDocs } = useDefDocs();
     const { clients, setClients } = useClientList();
     const [isOpen, setIsOpen] = useState(false)
+    const { data, metaData } = usePaginationData({ list: clients, limit, page })
+    console.log(metaData.pagination.totalItens)
 
-    useEffect(() => { usePaginationData({ list: clients, limit }) }, [])
 
     return (
         <>
+            <button onClick={() => { usePaginationData({ list: clients, limit, page }) }}>aqui o</button>
             <WrapperTitle>
                 <h1>Clientes</h1>
                 <div onClick={() => setIsOpen(true)}>ADICIONAR<ReactIcons.FaUserPlus /></div>
@@ -37,21 +39,23 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                 {(clients.length != 0 && defDocs.length != 0) &&
                     <table>
                         <thead>
-                            <th><input type="search" placeholder="Nome..." /></th>
-                            <th><input type="search" placeholder="Documento..." /></th>
-                            <th><input type="text" placeholder="Telefone..." /></th>
-                            <th>
-                                <select>
-                                    <option selected hidden value="">Tipo do Documento</option>
-                                    <option value="">Todos</option>
-                                    {defDocs.map((item, index) => (<option key={index} value={item.idTipoDocumento} >{item.tipoDocumento}</option>))}
-                                </select>
+                            <tr>
+                                <th><input type="search" placeholder="Nome..." /></th>
+                                <th><input type="search" placeholder="Documento..." /></th>
+                                <th><input type="text" placeholder="Telefone..." /></th>
+                                <th>
+                                    <select>
+                                        <option selected hidden value="">Tipo do Documento</option>
+                                        <option value="">Todos</option>
+                                        {defDocs.map((item, index) => (<option key={index} value={item.idTipoDocumento} >{item.tipoDocumento}</option>))}
+                                    </select>
 
-                            </th>
-                            <th>Ações</th>
+                                </th>
+                                <th>Ações</th>
+                            </tr>
                         </thead>
                         <tbody >
-                            {clients.map((item, index) => (
+                            {data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.nomeCliente}</td>
                                     <td>{item.documentoCliente}</td>
