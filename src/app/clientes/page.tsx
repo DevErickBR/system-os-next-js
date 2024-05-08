@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { Wrapper, ButtonAction, WrapperTitle } from "./styled";
 import ModalClient from "../components/modal-client";
 import usePaginationData from "@/helpers/usePaginationData";
+import Pagination from "../components/Pagination";
 
 
 type Props = {
@@ -19,13 +20,12 @@ type Props = {
 
 const Page = ({ searchParams }: Props): JSX.Element => {
     const page = Number(searchParams?.page) || 1;
-    const limit = Number(searchParams?.limit) || 5;
+    const limit = Number(searchParams?.limit) || 10;
 
     const { defDocs } = useDefDocs();
     const { clients, setClients } = useClientList();
     const [isOpen, setIsOpen] = useState(false)
     const { data, metaData } = usePaginationData({ list: clients, limit, page })
-    console.log(metaData.pagination.totalItens)
 
 
     return (
@@ -79,6 +79,7 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                 }
             </Wrapper >
             <ModalClient view={isOpen} state={setIsOpen} listClients={clients} setList={setClients} />
+            <Pagination page={page} limit={limit} totalItens={metaData.pagination.totalItens} />
         </>
     );
 };
