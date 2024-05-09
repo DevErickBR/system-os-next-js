@@ -28,7 +28,7 @@ const Page = ({ searchParams }: Props): JSX.Element => {
     const { defDocs } = useDefDocs();
     const { clients, setClients } = useClientList();
     const [isOpen, setIsOpen] = useState(false)
-    const filterList = useFilterList({ list: clients, nome: name })
+    const filterList = useFilterList({ list: clients, nome: name, documento, tel })
     const { data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
 
 
