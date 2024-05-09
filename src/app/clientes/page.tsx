@@ -9,6 +9,7 @@ import { Wrapper, ButtonAction, WrapperTitle } from "./styled";
 import ModalClient from "../components/modal-client";
 import usePaginationData from "@/helpers/usePaginationData";
 import Pagination from "../components/Pagination";
+import useFilterList from "@/helpers/useFilterList";
 
 
 type Props = {
@@ -21,17 +22,21 @@ type Props = {
 const Page = ({ searchParams }: Props): JSX.Element => {
     const page = Number(searchParams?.page) || 1;
     const limit = Number(searchParams?.limit) || 10;
-
+    const [name, setName] = useState("")
+    const [documento, setDocumento] = useState("")
+    const [tel, setTel] = useState("")
     const { defDocs } = useDefDocs();
     const { clients, setClients } = useClientList();
     const [isOpen, setIsOpen] = useState(false)
-    const { data, metaData } = usePaginationData({ list: clients, limit, page })
+    const filterList = useFilterList({ list: clients, nome: name })
+    const { data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
+
 
 
     return (
         <>
-            <button onClick={() => { usePaginationData({ list: clients, limit, page }) }}>aqui o</button>
             <WrapperTitle>
+                <button onClick={() => useFilterList({ list: clients, nome: "Erick" })}>Opa</button>
                 <h1>Clientes</h1>
                 <div onClick={() => setIsOpen(true)}>ADICIONAR<ReactIcons.FaUserPlus /></div>
             </WrapperTitle>
@@ -40,13 +45,12 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                     <table>
                         <thead>
                             <tr>
-                                <th><input type="search" placeholder="Nome..." /></th>
-                                <th><input type="search" placeholder="Documento..." /></th>
-                                <th><input type="text" placeholder="Telefone..." /></th>
+                                <th><input type="search" placeholder="Nome..." value={name} onChange={(e) => { setName(e.target.value) }} /></th>
+                                <th><input type="search" placeholder="Documento..." value={documento} onChange={(e) => { setDocumento(e.target.value) }} /></th>
+                                <th><input type="text" placeholder="Telefone..." value={tel} onChange={(e) => { setTel(e.target.value) }} /></th>
                                 <th>
                                     <select>
                                         <option selected hidden value="">Tipo do Documento</option>
-                                        <option value="">Todos</option>
                                         {defDocs.map((item, index) => (<option key={index} value={item.idTipoDocumento} >{item.tipoDocumento}</option>))}
                                     </select>
 
