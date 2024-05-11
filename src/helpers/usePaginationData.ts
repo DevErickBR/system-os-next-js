@@ -8,7 +8,7 @@ type Props = {
 const usePaginationData = ({ list, limit, page, filterList }: Props) => {
     const metaData = {
         pagination: {
-            totalItens: list.length,
+            totalItens: (filterList ? filterList.length : list.length),
             current: page
         }
     }
@@ -23,7 +23,6 @@ const usePaginationData = ({ list, limit, page, filterList }: Props) => {
                     newPage.push(filterList[count])
                     count++
                 }
-
             }
 
             response.push(newPage)

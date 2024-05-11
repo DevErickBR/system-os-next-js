@@ -10,6 +10,7 @@ import ModalClient from "../components/modal-client";
 import usePaginationData from "@/helpers/usePaginationData";
 import Pagination from "../components/Pagination";
 import useFilterList from "@/helpers/useFilterList";
+import handleSetValue from "@/helpers/useSetValueSelect";
 
 
 type Props = {
@@ -24,11 +25,12 @@ const Page = ({ searchParams }: Props): JSX.Element => {
     const limit = Number(searchParams?.limit) || 10;
     const [name, setName] = useState("")
     const [documento, setDocumento] = useState("")
+    const [idDoc, setIdDoc] = useState("")
     const [tel, setTel] = useState("")
     const { defDocs } = useDefDocs();
     const { clients, setClients } = useClientList();
     const [isOpen, setIsOpen] = useState(false)
-    const filterList = useFilterList({ list: clients, nome: name, documento, tel })
+    const filterList = useFilterList({ list: clients, nome: name, documento, tel, idDocumento: idDoc })
     const { data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
 
 
@@ -36,7 +38,6 @@ const Page = ({ searchParams }: Props): JSX.Element => {
     return (
         <>
             <WrapperTitle>
-                <button onClick={() => useFilterList({ list: clients, nome: "Erick" })}>Opa</button>
                 <h1>Clientes</h1>
                 <div onClick={() => setIsOpen(true)}>ADICIONAR<ReactIcons.FaUserPlus /></div>
             </WrapperTitle>
@@ -49,7 +50,7 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                                 <th><input type="search" placeholder="Documento..." value={documento} onChange={(e) => { setDocumento(e.target.value) }} /></th>
                                 <th><input type="text" placeholder="Telefone..." value={tel} onChange={(e) => { setTel(e.target.value) }} /></th>
                                 <th>
-                                    <select>
+                                    <select value={idDoc} onChange={(event) => handleSetValue(event, setIdDoc)}>
                                         <option selected hidden value="">Tipo do Documento</option>
                                         {defDocs.map((item, index) => (<option key={index} value={item.idTipoDocumento} >{item.tipoDocumento}</option>))}
                                     </select>

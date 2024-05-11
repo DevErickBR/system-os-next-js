@@ -26,8 +26,12 @@ export const ListItem = styled.li<Props>`
     padding: .6rem;
     border:solid 2px ${props => props.theme.colors.secondary};
     border-radius: 0.5rem;
+    width:100%;
+        height:100%;
     a {
         text-decoration: none;
         color:${props => props.theme.colors.text};
+        width:100%;
+        height:100%;
     }
 `;
