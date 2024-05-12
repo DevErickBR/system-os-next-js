@@ -15,6 +15,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: "Reddit Mono", monospace;
   }
+
+  
 `;
 
 const Wrapper = styled.div`
@@ -24,6 +26,12 @@ const Wrapper = styled.div`
   -webkit-font-smoothing:  antialiased;
   height: 100vh;
   width: 100vw;
+
+  @media (max-width: 800px) {
+      display: block;
+      overflow: hidden;
+    }
+
 `;
 
 const WrapperChildren = styled.div`
@@ -46,6 +54,13 @@ const WrapperChildren = styled.div`
     background-clip: content-box;
   }
 
+  @media (max-width: 800px) {
+      height: 100%;
+      width: 100%;
+      justify-content: start;
+      margin-top:1rem;
+      
+    }
 `;
 
 

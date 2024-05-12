@@ -9,10 +9,12 @@ export const WrapperModal = styled.div`
     right:0;
     position:absolute;
     display:flex;
+    flex-direction: column;
     align-items:center;
     justify-content:center;
     gap: 3rem;
     z-index: 99999;
+    overflow: auto;
 `;
 
 export const WrapperInfo = styled.div`
@@ -107,6 +109,16 @@ export const WrapperInfo = styled.div`
             box-shadow:none;
         }
     }
+
+    @media (max-width: 800px) {
+        width: 90%;
+        height: 90%;
+
+        .hidden {
+            display:none;
+        }
+
+    }
 `;
 
 export const WrapperList = styled.div`
@@ -191,5 +203,9 @@ export const WrapperList = styled.div`
                     margin: 1rem;
                 }
         
+    }
+
+    @media (max-width: 800px) {
+
     }
 `;

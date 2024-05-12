@@ -9,6 +9,8 @@ import { Wrapper, ButtonAction, WrapperTitle } from "./styled";
 import ModalClient from "../components/modal-client";
 import usePaginationData from "@/helpers/usePaginationData";
 import Pagination from "../components/Pagination";
+import useFilterList from "@/helpers/useFilterList";
+import handleSetValue from "@/helpers/useSetValueSelect";
 
 
 type Props = {
@@ -21,16 +23,20 @@ type Props = {
 const Page = ({ searchParams }: Props): JSX.Element => {
     const page = Number(searchParams?.page) || 1;
     const limit = Number(searchParams?.limit) || 10;
-
+    const [name, setName] = useState("")
+    const [documento, setDocumento] = useState("")
+    const [idDoc, setIdDoc] = useState("")
+    const [tel, setTel] = useState("")
     const { defDocs } = useDefDocs();
     const { clients, setClients } = useClientList();
     const [isOpen, setIsOpen] = useState(false)
-    const { data, metaData } = usePaginationData({ list: clients, limit, page })
+    const filterList = useFilterList({ list: clients, nome: name, documento, tel, idDocumento: idDoc })
+    const { Data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
+
 
 
     return (
         <>
-            <button onClick={() => { usePaginationData({ list: clients, limit, page }) }}>aqui o</button>
             <WrapperTitle>
                 <h1>Clientes</h1>
                 <div onClick={() => setIsOpen(true)}>ADICIONAR<ReactIcons.FaUserPlus /></div>
@@ -40,32 +46,37 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                     <table>
                         <thead>
                             <tr>
-                                <th><input type="search" placeholder="Nome..." /></th>
-                                <th><input type="search" placeholder="Documento..." /></th>
-                                <th><input type="text" placeholder="Telefone..." /></th>
+                                <th><input type="search" placeholder="Nome..." value={name} onChange={(e) => { setName(e.target.value) }} /></th>
+                                <th><input type="search" placeholder="Documento..." value={documento} onChange={(e) => { setDocumento(e.target.value) }} /></th>
+                                <th className="hidden"><input type="text" placeholder="Telefone..." value={tel} onChange={(e) => { setTel(e.target.value) }} /></th>
                                 <th>
-                                    <select>
+                                    <select value={idDoc} onChange={(event) => handleSetValue(event, setIdDoc)}>
                                         <option selected hidden value="">Tipo do Documento</option>
-                                        <option value="">Todos</option>
+                                        <option value={""}>Todos</option>
                                         {defDocs.map((item, index) => (<option key={index} value={item.idTipoDocumento} >{item.tipoDocumento}</option>))}
                                     </select>
 
                                 </th>
-                                <th>Ações</th>
+                                <th >Ações</th>
                             </tr>
                         </thead>
                         <tbody >
-                            {data.map((item, index) => (
+                            {Data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.nomeCliente}</td>
                                     <td>{item.documentoCliente}</td>
-                                    <td>{item.telefoneCliente}</td>
+                                    <td className="hidden">{item.telefoneCliente}</td>
                                     <td>{defDocs[item.idTipoDocumento - 1].tipoDocumento}</td>
                                     <td className="actions">
                                         <div className="WrapperActions">
-                                            <ButtonAction id="delete" onClick={() => { useDeleteClient(item, clients, setClients) }}><ReactIcons.FaUserMinus /></ButtonAction>
-                                            <ButtonAction id="edit" ><ReactIcons.FaUserPen /></ButtonAction>
-                                            <ButtonAction id="more"><ReactIcons.FaPlus /></ButtonAction>
+                                            <ButtonAction id="delete" onClick={() => { useDeleteClient(item, clients, setClients) }}>
+                                                <ReactIcons.FaUserMinus />
+                                                <label htmlFor="delete">Excluir</label>
+                                            </ButtonAction>
+                                            <ButtonAction id="edit" >
+                                                <ReactIcons.FaUserPen />
+                                                <label htmlFor="edit">Editar</label>
+                                            </ButtonAction>
                                         </div>
                                     </td>
                                 </tr>
