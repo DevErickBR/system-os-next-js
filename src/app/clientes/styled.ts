@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 
 export const Wrapper = styled.div`
+
+    /* Estilos Desktop */
+
     display:flex;
     flex-direction:column;
     width: 90%;
@@ -10,8 +13,6 @@ export const Wrapper = styled.div`
     overflow:auto;
     z-index: 1;
     letter-spacing: 0.15rem;
-    
-    
     
 
     table{
@@ -22,9 +23,6 @@ export const Wrapper = styled.div`
         padding: 1rem;
         border-left:solid .75rem ${props => props.theme.colors.primary};
         border-bottom:solid .75rem ${props => props.theme.colors.primary};
-        
-        
-        
         
         thead{
             background-color: ${props => props.theme.colors.primary};
@@ -102,6 +100,8 @@ export const Wrapper = styled.div`
                         justify-content:center;
                         align-items:center
                     }
+
+
                 }
             }
 
@@ -109,29 +109,72 @@ export const Wrapper = styled.div`
     
     }
 
-    
+    /* Estilos Mobile */
 
+    @media (max-width: 800px) {
+        .hidden {
+            display: none;
+        }
+        table {
+            thead{
+                th{
+                width: 200px;
+                padding: 0 1rem;
+            }
+            }
+            tbody{
+            td{
+            font-size: .8rem;
+            padding: 0 .7rem;
+        }
+        }
+        label {
+            display: none;
+        }
+        }
+
+
+    }
     
 `;
 
 
 export const ButtonAction = styled.div`
-    display: inline;
     font-size: 1.5rem;
-    text-align:center;
-    width: fit-content;
+    width: fit-content;   
+    cursor: pointer;
     
     svg{
         transition: transform 0.3s ease;
-        cursor: pointer;
-        &:hover{
-            transform:scale(1.4);
+        z-index:3;
+    }
+
+    label{
+        
+        font-size: 1rem;
+        position:absolute;
+        opacity: 0;
+        transition: transform .5s ease-out, opacity .3s ease-in-out;
+    }
+    &:hover label{
+       transform: translateY(100%); 
+       opacity: 1;
+       color: ${props => props.theme.colors.secondary};
+    }
+
+    &:hover svg{
             color: ${props => props.theme.colors.secondary};
-        }
+            transform: translateY(-30%) scale(1.4); 
     }
 
     
+    @media (max-width: 800px) {
+        &:hover *{
+            transform:unset;
+            color: ${props => props.theme.colors.text};
+        }
 
+    }
     
 `;
 
@@ -162,5 +205,10 @@ export const WrapperTitle = styled.div`
             transform:scale(1.1);
             box-shadow: rgba(0, 0, 0, 0.15) 0px -50px 36px -28px inset;
         }
+    }
+
+    @media (max-width: 800px) {
+        transform:scale(0.9);
+        
     }
 `;

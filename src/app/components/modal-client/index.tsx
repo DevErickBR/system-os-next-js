@@ -39,7 +39,7 @@ function ModalClient({ view, state, setList, listClients }: Props): JSX.Element 
                 <WrapperModal>
                     <WrapperInfo>
                         <h1>Preencha os Dados do Cliente</h1>
-                        <div className="check">
+                        <div className="check hidden">
                             <input type="checkbox" checked={addOrMore} name="more" onClick={() => setAddOrMore(!addOrMore)} />
                             <label htmlFor="more">Enviar Mais de um Cliente?</label>
                         </div>

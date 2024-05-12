@@ -53,7 +53,15 @@ export const Wrapper = styled.div<Props>`
         background-color:transparent;
     }
 
-    
+    @media (max-width: 800px) {
+        width: 4rem;
+        height: 100%;
+        *:hover {
+        }
+    }
+    &:after{
+        display:none;
+    } 
     
     
 `;

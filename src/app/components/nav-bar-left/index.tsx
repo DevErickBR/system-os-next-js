@@ -7,10 +7,10 @@ function NavBarLeft(): JSX.Element {
     return (
         <styled.Wrapper>
             <Link href='/clientes'><Icon Svg={ReactIcons.FaUsers} desc="Clientes" /></Link>
-            <Icon Svg={ReactIcons.FaClipboard} desc="Ordens de Serviço" />
-            <Icon Svg={ReactIcons.FaLaptop} desc="Aparelhos" />
-            <Icon Svg={ReactIcons.FaWrench} desc="Garantias" />
-            <Icon Svg={ReactIcons.FaGears} desc="Definições" />
+            <Link href={'/'}><Icon Svg={ReactIcons.FaClipboard} desc="Ordens de Serviço" /></Link>
+            <Link href={'/'}><Icon Svg={ReactIcons.FaLaptop} desc="Aparelhos" /></Link>
+            <Link href={'/'}><Icon Svg={ReactIcons.FaWrench} desc="Garantias" /></Link>
+            <Link href={'/'}><Icon Svg={ReactIcons.FaGears} desc="Definições" /></Link>
         </styled.Wrapper>
     );
 };

@@ -31,7 +31,7 @@ const Page = ({ searchParams }: Props): JSX.Element => {
     const { clients, setClients } = useClientList();
     const [isOpen, setIsOpen] = useState(false)
     const filterList = useFilterList({ list: clients, nome: name, documento, tel, idDocumento: idDoc })
-    const { data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
+    const { Data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
 
 
 
@@ -48,29 +48,35 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                             <tr>
                                 <th><input type="search" placeholder="Nome..." value={name} onChange={(e) => { setName(e.target.value) }} /></th>
                                 <th><input type="search" placeholder="Documento..." value={documento} onChange={(e) => { setDocumento(e.target.value) }} /></th>
-                                <th><input type="text" placeholder="Telefone..." value={tel} onChange={(e) => { setTel(e.target.value) }} /></th>
+                                <th className="hidden"><input type="text" placeholder="Telefone..." value={tel} onChange={(e) => { setTel(e.target.value) }} /></th>
                                 <th>
                                     <select value={idDoc} onChange={(event) => handleSetValue(event, setIdDoc)}>
                                         <option selected hidden value="">Tipo do Documento</option>
+                                        <option value={""}>Todos</option>
                                         {defDocs.map((item, index) => (<option key={index} value={item.idTipoDocumento} >{item.tipoDocumento}</option>))}
                                     </select>
 
                                 </th>
-                                <th>Ações</th>
+                                <th >Ações</th>
                             </tr>
                         </thead>
                         <tbody >
-                            {data.map((item, index) => (
+                            {Data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item.nomeCliente}</td>
                                     <td>{item.documentoCliente}</td>
-                                    <td>{item.telefoneCliente}</td>
+                                    <td className="hidden">{item.telefoneCliente}</td>
                                     <td>{defDocs[item.idTipoDocumento - 1].tipoDocumento}</td>
                                     <td className="actions">
                                         <div className="WrapperActions">
-                                            <ButtonAction id="delete" onClick={() => { useDeleteClient(item, clients, setClients) }}><ReactIcons.FaUserMinus /></ButtonAction>
-                                            <ButtonAction id="edit" ><ReactIcons.FaUserPen /></ButtonAction>
-                                            <ButtonAction id="more"><ReactIcons.FaPlus /></ButtonAction>
+                                            <ButtonAction id="delete" onClick={() => { useDeleteClient(item, clients, setClients) }}>
+                                                <ReactIcons.FaUserMinus />
+                                                <label htmlFor="delete">Excluir</label>
+                                            </ButtonAction>
+                                            <ButtonAction id="edit" >
+                                                <ReactIcons.FaUserPen />
+                                                <label htmlFor="edit">Editar</label>
+                                            </ButtonAction>
                                         </div>
                                     </td>
                                 </tr>

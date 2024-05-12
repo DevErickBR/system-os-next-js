@@ -15,6 +15,7 @@ const usePaginationData = ({ list, limit, page, filterList }: Props) => {
     const response: Client[][] = [];
     const pages = Math.ceil(metaData.pagination.totalItens / limit)
     let count = 0
+    let Data: Client[] = []
     if (filterList) {
         for (let i = 1; i <= pages; i++) {
             const newPage = [];
@@ -43,10 +44,13 @@ const usePaginationData = ({ list, limit, page, filterList }: Props) => {
         }
     }
 
-    const data = response[metaData.pagination.current - 1]
-    return { data, metaData }
+    if (response.length === 0) {
+        Data = []
+    } else (
+        Data = response[metaData.pagination.current - 1]
+    )
+    return { Data, metaData }
 }
 
 
-export default usePaginationData
-
+export default usePaginationData;
