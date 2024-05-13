@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
 
-type SetState<T> = Dispatch<SetStateAction<string>>
+type SetState<T> = Dispatch<SetStateAction<T>>
 
 export const resetInputValue = (...setStates: SetState<string>[]) => {
     setStates.forEach(setState => {

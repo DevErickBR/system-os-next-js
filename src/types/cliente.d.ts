@@ -1,5 +1,5 @@
 declare type Client = {
-    idCliente?: number,
+    idCliente: number,
     nomeCliente: string,
     telefoneCliente: string,
     idTipoDocumento: number,

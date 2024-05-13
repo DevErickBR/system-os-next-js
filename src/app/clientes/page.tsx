@@ -11,6 +11,7 @@ import usePaginationData from "@/helpers/usePaginationData";
 import Pagination from "../components/Pagination";
 import useFilterList from "@/helpers/useFilterList";
 import handleSetValue from "@/helpers/useSetValueSelect";
+import ModalEditClient from "../components/modal-edit-client";
 
 
 type Props = {
@@ -32,6 +33,8 @@ const Page = ({ searchParams }: Props): JSX.Element => {
     const [isOpen, setIsOpen] = useState(false)
     const filterList = useFilterList({ list: clients, nome: name, documento, tel, idDocumento: idDoc })
     const { Data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
+    const [showEdit, setShowEdit] = useState(false)
+    const [currentClient, setCurrentClient] = useState<Client>(Data[0])
 
 
 
@@ -73,7 +76,7 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                                                 <ReactIcons.FaUserMinus />
                                                 <label htmlFor="delete">Excluir</label>
                                             </ButtonAction>
-                                            <ButtonAction id="edit" >
+                                            <ButtonAction id="edit" onClick={() => { setShowEdit(true); setCurrentClient(item); }}>
                                                 <ReactIcons.FaUserPen />
                                                 <label htmlFor="edit">Editar</label>
                                             </ButtonAction>
@@ -90,6 +93,7 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                 }
             </Wrapper >
             <ModalClient view={isOpen} state={setIsOpen} listClients={clients} setList={setClients} />
+            <ModalEditClient view={showEdit} state={setShowEdit} cliente={currentClient} />
             <Pagination page={page} limit={limit} totalItens={metaData.pagination.totalItens} />
         </>
     );
