@@ -3,6 +3,8 @@ import { WrapperInfo, WrapperModal } from "./styles";
 import useDefDocs from "@/helpers/useDefDoc";
 import * as ReactIcons from 'react-icons/fa6'
 import handleSetValue from "@/helpers/useSetValueSelect";
+import useEditClient from "@/helpers/useEditCLient";
+import Cliente from "@/helpers/classClient";
 
 
 
@@ -22,7 +24,6 @@ function ModalEditClient({ view, state, cliente }: Props): JSX.Element {
 
     useEffect(() => {
         if (cliente != undefined) {
-            console.log(cliente)
             setName(cliente.nomeCliente)
             setDocument(cliente.documentoCliente)
             setTel(cliente.telefoneCliente)
@@ -73,7 +74,7 @@ function ModalEditClient({ view, state, cliente }: Props): JSX.Element {
                             onChange={(e) => setEmail(e.target.value)}
                         />
 
-                        <button type="submit" onClick={() => { }}>
+                        <button type="submit" onClick={() => { useEditClient(cliente.idCliente, name, tel, parseInt(idDoc), documento, email) }}>
                             Salvar<ReactIcons.FaUserCheck />
                         </button>
 
