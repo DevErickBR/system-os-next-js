@@ -12,9 +12,11 @@ type Props = {
     view: boolean,
     state: React.Dispatch<React.SetStateAction<boolean>>,
     cliente: Client;
+    list: Client[];
+    setList: Dispatch<SetStateAction<Client[]>>
 }
 
-function ModalEditClient({ view, state, cliente }: Props): JSX.Element {
+function ModalEditClient({ view, state, cliente, list, setList }: Props): JSX.Element {
     const [name, setName] = useState('')
     const [documento, setDocument] = useState('')
     const [tel, setTel] = useState('')

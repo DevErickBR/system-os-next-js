@@ -12,6 +12,7 @@ import Pagination from "../components/Pagination";
 import useFilterList from "@/helpers/useFilterList";
 import handleSetValue from "@/helpers/useSetValueSelect";
 import ModalEditClient from "../components/modal-edit-client";
+import ModalNotification from "../components/modal-notification";
 
 
 type Props = {
@@ -92,9 +93,12 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                     <h1>Nenhum Cliente Cadastrado!</h1>
                 }
             </Wrapper >
+
             <ModalClient view={isOpen} state={setIsOpen} listClients={clients} setList={setClients} />
-            <ModalEditClient view={showEdit} state={setShowEdit} cliente={currentClient} />
+            <ModalEditClient view={showEdit} state={setShowEdit} cliente={currentClient} list={clients} setList={setClients} />
             <Pagination page={page} limit={limit} totalItens={metaData.pagination.totalItens} />
+            <ModalNotification msg="ola mundo" view={true} />
+
         </>
     );
 };
