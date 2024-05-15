@@ -95,7 +95,7 @@ const Page = ({ searchParams }: Props): JSX.Element => {
             </Wrapper >
 
             <ModalClient view={isOpen} state={setIsOpen} listClients={clients} setList={setClients} />
-            <ModalEditClient view={showEdit} state={setShowEdit} cliente={currentClient} list={clients} setList={setClients} />
+            <ModalEditClient view={showEdit} state={setShowEdit} cliente={currentClient} />
             <Pagination page={page} limit={limit} totalItens={metaData.pagination.totalItens} />
             <ModalNotification msg="ola mundo" view={true} />
 

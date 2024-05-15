@@ -4,19 +4,15 @@ import useDefDocs from "@/helpers/useDefDoc";
 import * as ReactIcons from 'react-icons/fa6'
 import handleSetValue from "@/helpers/useSetValueSelect";
 import useEditClient from "@/helpers/useEditCLient";
-import Cliente from "@/helpers/classClient";
-
 
 
 type Props = {
     view: boolean,
     state: React.Dispatch<React.SetStateAction<boolean>>,
     cliente: Client;
-    list: Client[];
-    setList: Dispatch<SetStateAction<Client[]>>
 }
 
-function ModalEditClient({ view, state, cliente, list, setList }: Props): JSX.Element {
+function ModalEditClient({ view, state, cliente }: Props): JSX.Element {
     const [name, setName] = useState('')
     const [documento, setDocument] = useState('')
     const [tel, setTel] = useState('')

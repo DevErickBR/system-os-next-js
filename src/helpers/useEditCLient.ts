@@ -17,7 +17,7 @@ const useEditClient = async (id: number, name: string, tel: string, idDoc: numbe
     }).then(res => msg = res.data)
 
     console.log(msg)
-    return msg
+    return { msg }
 };
 
 export default useEditClient
