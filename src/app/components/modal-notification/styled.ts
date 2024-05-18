@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const WrapperNotification = styled.div`
     width:20rem;
-    height:3rem;
+    height:3rem; 
     z-index: 500;
     position:absolute;
     background-color: ${props => props.theme.colors.secondary + '80'};
@@ -21,8 +21,12 @@ export const WrapperNotification = styled.div`
     overflow:hidden;
 
     @keyframes moveBar {
-        to{transform: translateX(0)}
-        from{transform: translateX(100%)}
+        to{
+            transform: translateX(0);
+        }
+        from{
+            transform: translateX(100%);
+        }
     }
 
     &::after{

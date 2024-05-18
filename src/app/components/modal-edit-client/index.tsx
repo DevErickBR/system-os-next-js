@@ -4,15 +4,19 @@ import useDefDocs from "@/helpers/useDefDoc";
 import * as ReactIcons from 'react-icons/fa6'
 import handleSetValue from "@/helpers/useSetValueSelect";
 import useEditClient from "@/helpers/useEditCLient";
+import useSetViewNotification from '@/helpers/useSetViewNotification'
 
 
 type Props = {
     view: boolean,
     state: React.Dispatch<React.SetStateAction<boolean>>,
     cliente: Client;
+    setMsg: Dispatch<SetStateAction<string>>,
+    msg: string,
+    viewNot: Dispatch<SetStateAction<boolean>>
 }
 
-function ModalEditClient({ view, state, cliente }: Props): JSX.Element {
+function ModalEditClient({ view, state, cliente, setMsg, viewNot, msg }: Props): JSX.Element {
     const [name, setName] = useState('')
     const [documento, setDocument] = useState('')
     const [tel, setTel] = useState('')
@@ -72,13 +76,13 @@ function ModalEditClient({ view, state, cliente }: Props): JSX.Element {
                             onChange={(e) => setEmail(e.target.value)}
                         />
 
-                        <button type="submit" onClick={() => { useEditClient(cliente.idCliente, name, tel, parseInt(idDoc), documento, email) }}>
+                        <button type="submit" onClick={() => { useEditClient(cliente.idCliente, name, tel, parseInt(idDoc), documento, email, setMsg); useSetViewNotification({ setState: viewNot, msg }) }}>
                             Salvar<ReactIcons.FaUserCheck />
                         </button>
 
 
 
-                        <button className="back" onClick={() => { state(!view); window.location.reload() }} ><ReactIcons.FaArrowLeftLong />VOLTAR</button>
+                        <button className="back" onClick={() => { state(!view) }} ><ReactIcons.FaArrowLeftLong />VOLTAR</button>
                     </WrapperInfo>
                 </WrapperModal >
 

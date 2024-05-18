@@ -36,6 +36,8 @@ const Page = ({ searchParams }: Props): JSX.Element => {
     const { Data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
     const [showEdit, setShowEdit] = useState(false)
     const [currentClient, setCurrentClient] = useState<Client>(Data[0])
+    const [notification, setNotification] = useState('')
+    const [viewNotif, setViewNotif] = useState(false)
 
 
 
@@ -77,7 +79,7 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                                                 <ReactIcons.FaUserMinus />
                                                 <label htmlFor="delete">Excluir</label>
                                             </ButtonAction>
-                                            <ButtonAction id="edit" onClick={() => { setShowEdit(true); setCurrentClient(item); }}>
+                                            <ButtonAction id="edit" onClick={() => { setShowEdit(true); setCurrentClient(item) }}>
                                                 <ReactIcons.FaUserPen />
                                                 <label htmlFor="edit">Editar</label>
                                             </ButtonAction>
@@ -95,9 +97,9 @@ const Page = ({ searchParams }: Props): JSX.Element => {
             </Wrapper >
 
             <ModalClient view={isOpen} state={setIsOpen} listClients={clients} setList={setClients} />
-            <ModalEditClient view={showEdit} state={setShowEdit} cliente={currentClient} />
+            <ModalEditClient view={showEdit} state={setShowEdit} cliente={currentClient} setMsg={setNotification} viewNot={setViewNotif} msg={notification} />
             <Pagination page={page} limit={limit} totalItens={metaData.pagination.totalItens} />
-            <ModalNotification msg="ola mundo" view={true} />
+            <ModalNotification msg={notification} view={viewNotif} />
 
         </>
     );
