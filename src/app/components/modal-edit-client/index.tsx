@@ -25,6 +25,7 @@ function ModalEditClient({ view, state, cliente, setMsg, viewNot, msg }: Props):
     const { defDocs } = useDefDocs()
 
     useEffect(() => {
+        console.log(cliente)
         if (cliente != undefined) {
             setName(cliente.nomeCliente)
             setDocument(cliente.documentoCliente)
@@ -76,7 +77,8 @@ function ModalEditClient({ view, state, cliente, setMsg, viewNot, msg }: Props):
                             onChange={(e) => setEmail(e.target.value)}
                         />
 
-                        <button type="submit" onClick={() => { useEditClient(cliente.idCliente, name, tel, parseInt(idDoc), documento, email, setMsg); useSetViewNotification({ setState: viewNot, msg }) }}>
+
+                        <button type="submit" onClick={() => { useEditClient(cliente.idCliente as number, name, tel, parseInt(idDoc), documento, email, setMsg); useSetViewNotification({ setState: viewNot, msg }) }}>
                             Salvar<ReactIcons.FaUserCheck />
                         </button>
 

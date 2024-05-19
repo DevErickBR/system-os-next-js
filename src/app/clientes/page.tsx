@@ -3,6 +3,7 @@ import { useClientList } from "../../helpers/useClientList";
 import { useDefDocs } from "../../helpers/useDefDoc";
 import { useDeleteClient } from "../../helpers/useDeleteClient";
 import * as ReactIcons from 'react-icons/fa6'
+import { useRouter } from "next/navigation";
 
 import React, { useState } from "react";
 import { Wrapper, ButtonAction, WrapperTitle } from "./styled";
@@ -35,9 +36,10 @@ const Page = ({ searchParams }: Props): JSX.Element => {
     const filterList = useFilterList({ list: clients, nome: name, documento, tel, idDocumento: idDoc })
     const { Data, metaData } = usePaginationData({ list: clients, limit, page, filterList })
     const [showEdit, setShowEdit] = useState(false)
-    const [currentClient, setCurrentClient] = useState<Client>(Data[0])
+    const [currentClient, setCurrentClient] = useState<Client>(clients[0])
     const [notification, setNotification] = useState('')
     const [viewNotif, setViewNotif] = useState(false)
+    const rounter = useRouter()
 
 
 
@@ -67,26 +69,28 @@ const Page = ({ searchParams }: Props): JSX.Element => {
                             </tr>
                         </thead>
                         <tbody >
-                            {Data.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.nomeCliente}</td>
-                                    <td>{item.documentoCliente}</td>
-                                    <td className="hidden">{item.telefoneCliente}</td>
-                                    <td>{defDocs[item.idTipoDocumento - 1].tipoDocumento}</td>
-                                    <td className="actions">
-                                        <div className="WrapperActions">
-                                            <ButtonAction id="delete" onClick={() => { useDeleteClient(item, clients, setClients) }}>
-                                                <ReactIcons.FaUserMinus />
-                                                <label htmlFor="delete">Excluir</label>
-                                            </ButtonAction>
-                                            <ButtonAction id="edit" onClick={() => { setShowEdit(true); setCurrentClient(item) }}>
-                                                <ReactIcons.FaUserPen />
-                                                <label htmlFor="edit">Editar</label>
-                                            </ButtonAction>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
+                            {(Data != undefined) &&
+                                Data.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.nomeCliente}</td>
+                                        <td>{item.documentoCliente}</td>
+                                        <td className="hidden">{item.telefoneCliente}</td>
+                                        <td>{defDocs[item.idTipoDocumento - 1].tipoDocumento}</td>
+                                        <td className="actions">
+                                            <div className="WrapperActions">
+                                                <ButtonAction id="delete" onClick={() => { useDeleteClient(item, clients, setClients, Data, page, rounter) }}>
+                                                    <ReactIcons.FaUserMinus />
+                                                    <label htmlFor="delete">Excluir</label>
+                                                </ButtonAction>
+                                                <ButtonAction id="edit" onClick={() => { setShowEdit(true); setCurrentClient(item) }}>
+                                                    <ReactIcons.FaUserPen />
+                                                    <label htmlFor="edit">Editar</label>
+                                                </ButtonAction>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </table>
                 }
