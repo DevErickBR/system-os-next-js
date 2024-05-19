@@ -7,7 +7,7 @@ type Props = {
 
 const setViewNotification = ({ setState, msg }: Props) => {
     setState(true)
-    setInterval(() => {
+    setTimeout(() => {
         setState(false)
     }, 2000)
 

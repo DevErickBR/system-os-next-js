@@ -17,7 +17,7 @@ type Props = {
 const handleAddClient = ({ name, tel, idDoc, documento, email, setV, setList, list }: Props) => {
     if (name && documento && tel) {
         let doc = parseInt(idDoc)
-        let person = new Cliente(name, tel, doc, documento, email);
+        let person: Client = new Cliente(null, name, tel, doc, documento, email);
         setList([...list, person])
         useAddClient(person)
         setV(false)

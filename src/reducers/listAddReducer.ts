@@ -1,7 +1,7 @@
 type AddCliet = {
     type: "add",
     payload: {
-        idCliente?: number,
+        idCliente: number | null,
         nomeCliente: string,
         telefoneCliente: string,
         idTipoDocumento: number,
@@ -25,6 +25,7 @@ export const listReducer = (list: Client[], action: ListActions) => {
         case "add":
             return [
                 ...list, {
+                    idCliente: action.payload.idCliente,
                     nomeCliente: action.payload.nomeCliente,
                     telefoneCliente: action.payload.telefoneCliente,
                     documentoCliente: action.payload.documentoCliente,
@@ -33,7 +34,7 @@ export const listReducer = (list: Client[], action: ListActions) => {
                 }
             ]
         case "del":
-            return list.filter((item) => (action.payload.nomeCliente != item.nomeCliente))
+            return list.filter((item) => (action.payload.documentoCliente != item.documentoCliente))
         default:
             return list
 
