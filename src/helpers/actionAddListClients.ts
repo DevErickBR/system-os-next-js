@@ -14,12 +14,13 @@ type Props = {
 
 export const usePreAddClient = ({ dispatch, name, tel, idDoc, documento, email }: Props) => {
     let doc = parseInt(idDoc);
-    let person = new Cliente(name, tel, doc, documento, email);
+    let person: Client = new Cliente(null, name, tel, doc, documento, email);
 
     if (name && documento && tel) {
         dispatch({
             type: "add",
             payload: {
+                idCliente: person.idCliente,
                 nomeCliente: person.nomeCliente,
                 telefoneCliente: person.telefoneCliente,
                 idTipoDocumento: person.idTipoDocumento,

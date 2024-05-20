@@ -27,7 +27,7 @@ function ModalClient({ view, state, setList, listClients }: Props): JSX.Element 
 
     const [addOrMore, setAddOrMore] = useState(false)
     const { defDocs } = useDefDocs()
-    const [list, dispatch] = useReducer(listReducer, [])
+    const [list, dispatch] = useReducer(listReducer, [] as Client[])
 
 
 

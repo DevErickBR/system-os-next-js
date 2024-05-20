@@ -9,8 +9,8 @@ type Props = {
 const useFilterList = ({ list, nome, tel, documento, idDocumento }: Props) => {
     let filterList: Client[] = []
     if (nome || tel || documento || idDocumento) {
-        filterList = list.filter((client) => client.nomeCliente.toLowerCase().includes(nome.toLowerCase()) && client.documentoCliente.includes(documento) && client.telefoneCliente.includes(tel) && client.idTipoDocumento === parseInt(idDocumento))
-        console.log(filterList)
+        filterList = list.filter((client) => client.nomeCliente.toLowerCase().includes(nome.toLowerCase()) && client.documentoCliente.includes(documento) && client.telefoneCliente.includes(tel))
+        filterList = filterList.filter(client => client.idTipoDocumento === parseInt(idDocumento))
         return filterList
     }
 
