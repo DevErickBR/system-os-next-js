@@ -84,7 +84,7 @@ function ModalEditClient({ view, state, cliente, setMsg, viewNot, msg }: Props):
 
 
 
-                        <button className="back" onClick={() => { state(!view) }} ><ReactIcons.FaArrowLeftLong />VOLTAR</button>
+                        <button className="back" onClick={() => { state(!view); document.location.reload() }} ><ReactIcons.FaArrowLeftLong />VOLTAR</button>
                     </WrapperInfo>
                 </WrapperModal >
 
